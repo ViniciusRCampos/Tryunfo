@@ -34,7 +34,7 @@ class Form extends React.Component {
           />
           <Input
             type="textarea"
-            name="description"
+            name="cardDescription"
             id="description"
             testId="description-input"
             text="Description:"
@@ -43,7 +43,7 @@ class Form extends React.Component {
           />
           <Input
             type="number"
-            name="attribute1"
+            name="cardAttr1"
             id="att1"
             testId="attr1-input"
             text="Attribute 1:"
@@ -52,7 +52,7 @@ class Form extends React.Component {
           />
           <Input
             type="number"
-            name="attribute2"
+            name="cardAttr2"
             id="att2"
             testId="attr2-input"
             text="Attribute 2:"
@@ -61,7 +61,7 @@ class Form extends React.Component {
           />
           <Input
             type="number"
-            name="attribute3"
+            name="cardAttr3"
             id="att3"
             testId="attr3-input"
             text="Attribute 3:"
@@ -70,7 +70,7 @@ class Form extends React.Component {
           />
           <Input
             type="text"
-            name="url"
+            name="cardImage"
             id="urlImage"
             testId="image-input"
             text="Card Image(url):"
@@ -80,7 +80,7 @@ class Form extends React.Component {
           <label htmlFor="rarity">
             Rarity:
             <select
-              name="rarity"
+              name="cardRare"
               id="rarity"
               data-testid="rare-input"
               value={ cardRare }
@@ -93,7 +93,7 @@ class Form extends React.Component {
           </label>
           <Input
             type="checkbox"
-            name="trunfo"
+            name="cardTrunfo"
             id="trunfo"
             testId="trunfo-input"
             text="Super Trunfo:"
