@@ -13,6 +13,7 @@ class App extends React.Component {
     cardRare: 'normal',
     cardTrunfo: false,
     isSaveButtonDisabled: true,
+    savedCards: [],
   };
 
   verifyStringState = () => {
@@ -52,6 +53,51 @@ class App extends React.Component {
     this.setState({ [name]: value }, () => this.buttonStatus());
   };
 
+  appendCard = () => {
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+      savedCards,
+    } = this.state;
+    this.setState({
+      [savedCards]: savedCards.push(
+        {
+          cardName,
+          cardDescription,
+          cardAttr1,
+          cardAttr2,
+          cardAttr3,
+          cardImage,
+          cardRare,
+          cardTrunfo,
+        },
+      ),
+    });
+  };
+
+  resetState = () => {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardImage: '',
+      cardRare: 'normal',
+      cardTrunfo: false,
+    });
+  };
+
+  saveButton = () => {
+    this.setState(() => this.appendCard(), () => this.resetState());
+  };
+
   render() {
     const {
       cardName,
@@ -78,6 +124,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.saveButton }
         />
         <Card
           cardName={ cardName }
