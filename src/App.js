@@ -15,10 +15,41 @@ class App extends React.Component {
     isSaveButtonDisabled: true,
   };
 
+  verifyStringState = () => {
+    const { cardName, cardDescription, cardImage } = this.state;
+    return (
+      !!(cardName !== ''
+        && cardDescription !== ''
+        && cardImage !== ''));
+  };
+
+  verifyNumber = () => {
+    const { cardAttr1, cardAttr2, cardAttr3 } = this.state;
+    const Attribute1 = Number(cardAttr1);
+    const Attribute2 = Number(cardAttr2);
+    const Attribute3 = Number(cardAttr3);
+    const totalAttribute = Attribute1 + Attribute2 + Attribute3;
+    const totalPoints = 210;
+    const attributeCap = 90;
+    return (
+      !!(Attribute1 >= 0 && Attribute1 <= attributeCap
+        && Attribute2 >= 0 && Attribute2 <= attributeCap
+        && Attribute3 >= 0 && Attribute3 <= attributeCap
+        && totalAttribute <= totalPoints));
+  };
+
+  buttonStatus = () => {
+    if (this.verifyStringState() === true
+        && this.verifyNumber() === true) {
+      return this.setState({ isSaveButtonDisabled: false });
+    }
+    return this.setState({ isSaveButtonDisabled: true });
+  };
+
   onInputChange = ({ target }) => {
     const { name } = target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, () => this.buttonStatus());
   };
 
   render() {
