@@ -103,6 +103,18 @@ class App extends React.Component {
     this.addCard();
   };
 
+  deleteCard = (event) => {
+    const { savedCards } = this.state;
+    const position = savedCards.indexOf(
+      savedCards.find((e) => e.cardName === event.target.name),
+    );
+    if (savedCards[position].cardTrunfo === true) {
+      this.setState({ hasTrunfo: false });
+    }
+    savedCards.splice(position, 1);
+    this.setState({ savedCards });
+  };
+
   render() {
     const {
       cardName,
@@ -144,17 +156,27 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
-        {savedCards.map((cards) => (<Card
-          key={ cards.cardName }
-          cardName={ cards.cardName }
-          cardDescription={ cards.cardDescription }
-          cardAttr1={ cards.cardAttr1 }
-          cardAttr2={ cards.cardAttr2 }
-          cardAttr3={ cards.cardAttr3 }
-          cardImage={ cards.cardImage }
-          cardRare={ cards.cardRare }
-          cardTrunfo={ cards.cardTrunfo }
-        />
+        { savedCards.map((cards) => (
+          <div key={ cards.name }>
+            <Card
+              cardName={ cards.cardName }
+              cardDescription={ cards.cardDescription }
+              cardAttr1={ cards.cardAttr1 }
+              cardAttr2={ cards.cardAttr2 }
+              cardAttr3={ cards.cardAttr3 }
+              cardImage={ cards.cardImage }
+              cardRare={ cards.cardRare }
+              cardTrunfo={ cards.cardTrunfo }
+            />
+            <button
+              type="button"
+              data-testid="delete-button"
+              onClick={ this.deleteCard }
+              name={ cards.cardName }
+            >
+              Delete Card
+            </button>
+          </div>
         ))}
       </div>
     );
