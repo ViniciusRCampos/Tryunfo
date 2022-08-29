@@ -1,6 +1,8 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Filter from './components/Filter';
+import './components/app.css';
 
 class App extends React.Component {
   state = {
@@ -60,8 +62,7 @@ class App extends React.Component {
     const {
       cardName, cardDescription, cardAttr1,
       cardAttr2, cardAttr3, cardImage,
-      cardRare, cardTrunfo,
-    } = this.state;
+      cardRare, cardTrunfo } = this.state;
     const insert = {
       cardName,
       cardDescription,
@@ -78,8 +79,12 @@ class App extends React.Component {
   };
 
   verifyTrunfo = () => {
-    const { cardTrunfo } = this.state;
-    if (cardTrunfo === true) return this.setState({ hasTrunfo: true });
+    const { cardsInFilter } = this.state;
+    if (cardsInFilter.find((item) => item.cardTrunfo === true)) {
+      this.setState({ hasTrunfo: true });
+    } else {
+      this.setState({ hasTrunfo: false });
+    }
   };
 
   filterByName = ({ target }) => {
@@ -135,7 +140,8 @@ class App extends React.Component {
 
   saveButton = (event) => {
     event.preventDefault();
-    this.verifyTrunfo();
+    const { cardTrunfo } = this.state;
+    if (cardTrunfo === true) this.setState({ hasTrunfo: true });
     this.addCard();
   };
 
@@ -143,19 +149,20 @@ class App extends React.Component {
     const position = list.indexOf(
       list.find((e) => e.cardName === event.target.name),
     );
-    console.log(list[position].cardTrunfo);
+    console.log(list[position]);
     const { cardTrunfo } = list[position];
     if (cardTrunfo === true) {
       this.setState({ hasTrunfo: false });
     }
-    list.splice(list[position], 1);
+    list.splice(position, 1);
   };
 
   deleteCard = (event) => {
     const { savedCards, cardsInFilter } = this.state;
     this.findCard(event, savedCards);
     this.findCard(event, cardsInFilter);
-    this.setState({ cardsInFilter: savedCards });
+    console.log(savedCards, cardsInFilter);
+    this.setState({ cardsInFilter, savedCards }, () => this.verifyTrunfo());
   };
 
   render() {
@@ -164,82 +171,53 @@ class App extends React.Component {
       cardAttr2, cardAttr3, cardImage,
       cardRare, cardTrunfo, hasTrunfo,
       isSaveButtonDisabled, cardsInFilter,
-      disableInput,
-    } = this.state;
+      disableInput } = this.state;
     return (
-      <div>
+      <div className="body">
         <h1>Tryunfo</h1>
-        <Form
-          onInputChange={ this.onInputChange }
-          cardName={ cardName }
-          cardDescription={ cardDescription }
-          cardAttr1={ cardAttr1 }
-          cardAttr2={ cardAttr2 }
-          cardAttr3={ cardAttr3 }
-          cardImage={ cardImage }
-          cardRare={ cardRare }
-          cardTrunfo={ cardTrunfo }
-          isSaveButtonDisabled={ isSaveButtonDisabled }
-          onSaveButtonClick={ this.saveButton }
-          hasTrunfo={ hasTrunfo }
-        />
-        <Card
-          { ...this.state }
-        />
-        <section className="filter">
-          <h2>Filters</h2>
-          <label htmlFor="namefilter">
-            Card Name
-            <input
-              type="text"
-              name="namefilter"
-              id="namefilter"
-              onChange={ this.filterByName }
-              disabled={ disableInput }
-              data-testid="name-filter"
-            />
-          </label>
-          <label htmlFor="rarityfilter">
-            Rarity:
-            <select
-              name="rarityfilter"
-              id="rarityfilter"
-              data-testid="rare-filter"
-              disabled={ disableInput }
-              onChange={ this.filterByRarity }
-            >
-              <option value="todas">Todas</option>
-              <option value="normal">Normal</option>
-              <option value="raro">Raro</option>
-              <option value="muito raro">Muito raro</option>
-            </select>
-          </label>
-          <label htmlFor="trunfofilter">
-            Super Trunfo:
-            <input
-              type="checkbox"
-              name="trunfofilter"
-              id="trunfofilter"
-              data-testid="trunfo-filter"
-              onChange={ this.filterByTrunfo }
-            />
-          </label>
+        <section className="newcard">
+          <Form
+            onInputChange={ this.onInputChange }
+            cardName={ cardName }
+            cardDescription={ cardDescription }
+            cardAttr1={ cardAttr1 }
+            cardAttr2={ cardAttr2 }
+            cardAttr3={ cardAttr3 }
+            cardImage={ cardImage }
+            cardRare={ cardRare }
+            cardTrunfo={ cardTrunfo }
+            isSaveButtonDisabled={ isSaveButtonDisabled }
+            onSaveButtonClick={ this.saveButton }
+            hasTrunfo={ hasTrunfo }
+          />
+          <Card
+            { ...this.state }
+          />
         </section>
-        { cardsInFilter.map((cards) => (
-          <div key={ cards.name }>
-            <Card
-              { ...cards }
-            />
-            <button
-              type="button"
-              data-testid="delete-button"
-              onClick={ this.deleteCard }
-              name={ cards.cardName }
-            >
-              Delete Card
-            </button>
-          </div>
-        ))}
+        <Filter
+          filterByName={ this.filterByName }
+          filterByRarity={ this.filterByRarity }
+          filterByTrunfo={ this.filterByTrunfo }
+          disableInput={ disableInput }
+        />
+        <section className="decklist">
+          { cardsInFilter.map((cards) => (
+            <div key={ cards.name } className="deckcard">
+              <Card
+                { ...cards }
+              />
+              <button
+                className="deletebtn"
+                type="button"
+                data-testid="delete-button"
+                onClick={ this.deleteCard }
+                name={ cards.cardName }
+              >
+                Delete Card
+              </button>
+            </div>
+          ))}
+        </section>
       </div>
     );
   }

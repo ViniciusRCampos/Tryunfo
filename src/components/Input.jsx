@@ -12,9 +12,16 @@ class Input extends React.Component {
       value,
       onChange,
       onClick,
-      checked } = this.props;
+      checked,
+      min,
+      max,
+      rows,
+      cols,
+      maxlength,
+      wrap,
+      className } = this.props;
     return (
-      <label htmlFor={ id }>
+      <label htmlFor={ id } className={ `${id} ${className} label` }>
         {text}
         <input
           type={ type }
@@ -25,6 +32,13 @@ class Input extends React.Component {
           checked={ checked }
           onChange={ onChange }
           onClick={ onClick }
+          min={ min }
+          max={ max }
+          rows={ rows }
+          cols={ cols }
+          maxLength={ maxlength }
+          wrap={ wrap }
+          className={ className }
         />
       </label>
     );
@@ -32,15 +46,22 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
-  text: PropType.string.isRequired,
-  type: PropType.string.isRequired,
-  name: PropType.string.isRequired,
-  id: PropType.string.isRequired,
-  testId: PropType.string.isRequired,
-  value: PropType.string.isRequired,
-  onChange: PropType.func.isRequired,
-  onClick: PropType.func.isRequired,
-  checked: PropType.bool.isRequired,
-};
+  text: PropType.string,
+  type: PropType.string,
+  name: PropType.string,
+  id: PropType.string,
+  testId: PropType.string,
+  value: PropType.string,
+  onChange: PropType.func,
+  onClick: PropType.func,
+  checked: PropType.bool,
+  min: PropType.number,
+  max: PropType.number,
+  rows: PropType.number,
+  cols: PropType.number,
+  maxlength: PropType.number,
+  wrap: PropType.string,
+  className: PropType.string,
+}.isRequired;
 
 export default Input;

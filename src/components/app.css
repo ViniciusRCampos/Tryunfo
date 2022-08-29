@@ -1,0 +1,206 @@
+* {
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.body h1 {
+  color: white;
+  display: none;
+  text-align: center;
+}
+
+.newcard {
+  background-image: url('./images/background-test.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  display: flex;
+}
+
+.form {
+  color: black;
+  display: block;
+  height: 432px;
+  margin: 5%;
+  width: 40%;
+}
+
+.decklist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 300px;
+  overflow-x: hidden;
+  overflow-y: inherit;
+}
+
+.card {
+  align-content: center;
+  align-items: center;
+  color: black;
+  height: 432px;
+  margin: 5%;
+  margin-bottom: 0;
+  text-align: center;
+  width: 506px;
+}
+
+.card h2 {
+  font-size: 14px;
+  height: 27px;
+  margin-left: 31%;
+  margin-top: 6%;
+  text-align: start;
+  width: 260px;
+}
+
+.image-card {
+  background-size: contain;
+  height: 189px;
+  margin-left: 26%;
+  min-height: 189px;
+  min-width: 260px;
+  width: 260px;
+}
+
+.cards {
+  height: 430px;
+  width: 400px;
+}
+
+.rare-card {
+  display: none;
+}
+
+.normal {
+  background-image: url('./images/NORMAL\ RARITY.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.form input {
+  background-color: transparent;
+  box-shadow: 1px 1px 1px 1px gray;
+  color: black;
+}
+
+.raro {
+  background-image: url('./images/RARE\ RARITY.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.muito {
+  background-image: url('./images/VERY\ RARE\ RARITY.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.label {
+  background-color: transparent;
+  color: black;
+  display: block;
+  margin: 5%;
+  width: 40%;
+}
+
+.att3 {
+  display: none;
+}
+
+.cardform {
+  margin-left: 25%;
+  width: 50%;
+}
+
+.cardform button {
+  font-size: 20px;
+  margin-right: 45%;
+  width: 100px;
+}
+
+
+.super-trunfo {
+  background-image: url('./images/TRUNFO.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+}
+
+.description {
+  height: 70px;
+  margin-left: 5%;
+  margin-top: 7%;
+  overflow: auto;
+  overflow-wrap: break-word;
+  text-align: initial;
+  width: 177px;
+}
+
+.description-card {
+  height: 110px;
+  margin-left: 31.5%;
+  margin-top: 7%;
+  text-align: start;
+  width: 250px;
+}
+
+textarea {
+  background-color: transparent;
+  box-shadow: 1px 1px 1px 1px gray;
+  height: 45px;
+  overflow: hidden;
+  overflow-y: hidden;
+  resize: none;
+  width: 130px;
+}
+
+.stats {
+  display: flex;
+  margin-left: 83%;
+  margin-top: 0.7%;
+  width: 50px;
+}
+
+.atk {
+  width: 20px;
+}
+
+.res {
+  width: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.filter {
+  align-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.deckcard {
+  display: block;
+  height: 430px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  width: 504px;
+}
+
+.deletebtn {
+  margin-bottom: 25px;
+  margin-left: 45%;
+  margin-top: 10px;
+  width: 100px;
+}
+
+.deckcard div .stats {
+  margin-top: 1.5%;
+}

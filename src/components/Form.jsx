@@ -20,9 +20,8 @@ class Form extends React.Component {
     } = this.props;
 
     return (
-      <main>
-        <h1>Add new card</h1>
-        <form>
+      <section className="form">
+        <form className="cardform">
           <Input
             type="text"
             name="cardName"
@@ -31,42 +30,8 @@ class Form extends React.Component {
             text="New Card:"
             value={ cardName }
             onChange={ onInputChange }
-          />
-          <Input
-            type="textarea"
-            name="cardDescription"
-            id="description"
-            testId="description-input"
-            text="Description:"
-            value={ cardDescription }
-            onChange={ onInputChange }
-          />
-          <Input
-            type="number"
-            name="cardAttr1"
-            id="att1"
-            testId="attr1-input"
-            text="Attribute 1:"
-            value={ cardAttr1 }
-            onChange={ onInputChange }
-          />
-          <Input
-            type="number"
-            name="cardAttr2"
-            id="att2"
-            testId="attr2-input"
-            text="Attribute 2:"
-            value={ cardAttr2 }
-            onChange={ onInputChange }
-          />
-          <Input
-            type="number"
-            name="cardAttr3"
-            id="att3"
-            testId="attr3-input"
-            text="Attribute 3:"
-            value={ cardAttr3 }
-            onChange={ onInputChange }
+            className="cardName input"
+            maxlength="35"
           />
           <Input
             type="text"
@@ -76,8 +41,62 @@ class Form extends React.Component {
             text="Card Image(url):"
             value={ cardImage }
             onChange={ onInputChange }
+            className="cardImage input"
+            placeholder=""
           />
-          <label htmlFor="rarity">
+          <label htmlFor="description " className="description">
+            Description:
+            <textarea
+              name="cardDescription"
+              id="description"
+              data-testid="description-input"
+              text="Description:"
+              value={ cardDescription }
+              onChange={ onInputChange }
+              className="cardDescription input label"
+              maxLength="162"
+              rows="3"
+              cols="5"
+              wrap="hard"
+            />
+          </label>
+          <Input
+            type="number"
+            name="cardAttr1"
+            id="att1"
+            testId="attr1-input"
+            text="Power:"
+            value={ cardAttr1 }
+            onChange={ onInputChange }
+            className="cardAttr1 input"
+            min={ 0 }
+            max={ 90 }
+          />
+          <Input
+            type="number"
+            name="cardAttr2"
+            id="att2"
+            testId="attr2-input"
+            text="Toughness:"
+            value={ cardAttr2 }
+            onChange={ onInputChange }
+            min={ 0 }
+            max={ 90 }
+            className="cardAttr2 input"
+          />
+          <Input
+            type="number"
+            name="cardAttr3"
+            id="att3"
+            testId="attr3-input"
+            text="Attribute 3:"
+            value={ cardAttr3 }
+            onChange={ onInputChange }
+            min={ 0 }
+            max={ 90 }
+            className="cardAttr3 input"
+          />
+          <label htmlFor="rarity" className="input label">
             Rarity:
             <select
               name="cardRare"
@@ -85,10 +104,11 @@ class Form extends React.Component {
               data-testid="rare-input"
               value={ cardRare }
               onChange={ onInputChange }
+              className="input"
             >
               <option value="normal">Normal</option>
-              <option value="raro">raro</option>
-              <option value="muito raro">muito raro</option>
+              <option value="raro">Rare</option>
+              <option value="muito raro">Legendary</option>
             </select>
           </label>
           { hasTrunfo ? (<p>Você já tem um Super Trunfo em seu baralho</p>
@@ -97,9 +117,10 @@ class Form extends React.Component {
             name="cardTrunfo"
             id="trunfo"
             testId="trunfo-input"
-            text="Super Trunfo:"
+            text="Unique:"
             checked={ cardTrunfo }
             onChange={ onInputChange }
+            className="input"
           />)}
           <button
             type="submit"
@@ -111,7 +132,7 @@ class Form extends React.Component {
             Salvar
           </button>
         </form>
-      </main>
+      </section>
     );
   }
 }
