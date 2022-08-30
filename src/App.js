@@ -135,6 +135,7 @@ class App extends React.Component {
       cardImage: '',
       cardRare: 'normal',
       cardTrunfo: false,
+      isSaveButtonDisabled: true,
     });
   };
 
@@ -149,7 +150,6 @@ class App extends React.Component {
     const position = list.indexOf(
       list.find((e) => e.cardName === event.target.name),
     );
-    console.log(list[position]);
     const { cardTrunfo } = list[position];
     if (cardTrunfo === true) {
       this.setState({ hasTrunfo: false });
@@ -161,7 +161,6 @@ class App extends React.Component {
     const { savedCards, cardsInFilter } = this.state;
     this.findCard(event, savedCards);
     this.findCard(event, cardsInFilter);
-    console.log(savedCards, cardsInFilter);
     this.setState({ cardsInFilter, savedCards }, () => this.verifyTrunfo());
   };
 
